@@ -57,4 +57,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Habit::class);
     }
+
+    public function habitCheckIns(): HasMany
+    {
+        return $this->hasMany(HabitCheckIn::class);
+    }
 }

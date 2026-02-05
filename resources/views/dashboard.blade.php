@@ -9,12 +9,13 @@
     <x-habit.habit-card :habits="$habits" />
     <x-task.overdue-task-card :overdueTasks="$overdueTasks" />
     <x-progress.progress-chart
-        :tasks-created="$tasksCreated"
-        :tasks-completed="$tasksCompleted"
-        :habits-created="$habitsCreated"
-        :habits-completed="$habitsCompleted"
-        :habit-success="$habitSuccess"
-        :best-streak="$bestStreak" />
+        :tasks-created="$stats['tasksCreated']"
+        :tasks-completed="$stats['tasksCompleted']"
+        :habits-created="$stats['habitsCreated']"
+        :habits-completed="$stats['habitsCompleted']"
+        :habit-success="$stats['habitSuccess']"
+        :best-streak="$stats['bestStreak']" />
+
 </div>
 
 @endsection

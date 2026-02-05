@@ -5,18 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class Habit extends Model
+class HabitCheckIn extends Model
 {
-    /** @use HasFactory<\Database\Factories\HabitFactory> */
-    use HasFactory;
+    use HasFactory, RefreshDatabase;
 
     protected $fillable = [
         'user_id',
-        'name',
-        'frequency',
-        'target_count'
+        'habit_id',
+        'date'
     ];
 
     public function user(): BelongsTo
@@ -24,8 +22,8 @@ class Habit extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function habitCheckIns(): HasMany
+    public function habit(): BelongsTo
     {
-        return $this->hasMany(HabitCheckIn::class);
+        return $this->belongsTo(Habit::class);
     }
 }

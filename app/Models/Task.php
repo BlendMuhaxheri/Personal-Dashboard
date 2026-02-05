@@ -2,9 +2,13 @@
 
 namespace App\Models;
 
+use App\Enums\TaskPriority;
+use App\Enums\TaskStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+use function Symfony\Component\Clock\now;
 
 class Task extends Model
 {
@@ -18,6 +22,15 @@ class Task extends Model
         'due_date',
         'priority'
     ];
+
+    public function scopeOverdueTasks($query)
+    {
+        return $query
+            ->where('status', TaskStatus::ACTIVE)
+            ->where('due_date', '<', now())
+            ->where('priority', TaskPriority::HIGH)
+            ->orderByDesc('priority');
+    }
 
     public function user(): BelongsTo
     {
