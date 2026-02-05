@@ -40,7 +40,7 @@
             </x-form.select>
 
             {{-- Actions --}}
-            <div class="flex justify-end gap-3 pt-4 border-t border-slate-200">
+            <div class="flex justify-end gap-3 pt-4">
                 <a
                     href="{{ route('dashboard') }}"
                     class="text-sm text-slate-500 hover:text-slate-700">

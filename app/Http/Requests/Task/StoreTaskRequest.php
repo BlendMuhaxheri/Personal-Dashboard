@@ -32,4 +32,14 @@ class StoreTaskRequest extends FormRequest
             'priority'    => ['required', new Enum(TaskPriority::class)],
         ];
     }
+
+    public function validatedAttributes(): array
+    {
+        return $this->safe()->only([
+            'title',
+            'description',
+            'due_date',
+            'priority',
+        ]);
+    }
 }

@@ -11,16 +11,18 @@ class HabitController extends Controller
 {
     public function create()
     {
+        $this->authorize('create', Habit::class);
         return view('pages.habits.create');
     }
 
     public function store(StoreHabitRequest $request)
     {
+        $this->authorize(Habit::class);
 
-        $validatedAttributes = $request->validated();
-        $validatedAttributes['user_id'] = auth()->user()->id;
-
-        Habit::create($validatedAttributes);
+        Habit::create([
+            ...$request->validatedAttributes(),
+            'user_id' => auth()->id()
+        ]);
 
         return redirect()->route('dashboard');
     }

@@ -12,17 +12,20 @@ class TaskController extends Controller
 {
     public function create()
     {
+        $this->authorize('create', Task::class);
+
         return view('pages.tasks.create');
     }
 
     public function store(StoreTaskRequest $request)
     {
-        $validatedAttributes = $request->validated();
+        $this->authorize('create', Task::class);
 
-        $validatedAttributes['user_id'] = auth()->user()->id;
-        $validatedAttributes['status'] = TaskStatus::ACTIVE;
-
-        Task::create($validatedAttributes);
+        Task::create([
+            ...$request->validatedAttributes(),
+            'user_id' => auth()->id(),
+            'status' => TaskStatus::ACTIVE
+        ]);
 
         return redirect()->route('dashboard');
     }

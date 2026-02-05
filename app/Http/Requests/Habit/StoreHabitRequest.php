@@ -27,4 +27,13 @@ class StoreHabitRequest extends FormRequest
             'target_count' => ['required', 'integer', 'min:0'],
         ];
     }
+
+    public function validatedAttributes(): array
+    {
+        return $this->safe()->only([
+            'name',
+            'frequency',
+            'target_count',
+        ]);
+    }
 }

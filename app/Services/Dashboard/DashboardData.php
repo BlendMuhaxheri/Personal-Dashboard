@@ -2,42 +2,40 @@
 
 namespace App\Services\Dashboard;
 
-use App\Models\HabitCheckIn;
 use App\Enums\TaskStatus;
-use Illuminate\Support\Carbon;
+use App\Models\HabitCheckIn;
 
 class DashboardData
 {
     public static function for($user): array
     {
         return [
-            'stats'           => self::stats($user),
-            'tasks'           => self::tasksToday($user),
-            'habits'          => self::activeHabits($user),
-            'overdueTasks'    => self::overdueTasks($user)
+            'stats'        => self::stats($user),
+            'tasks'        => self::tasksToday($user),
+            'habits'       => self::activeHabits($user),
+            'overdueTasks' => self::overdueTasks($user),
         ];
     }
 
-    public static function tasksToday()
+    public static function tasksToday($user)
     {
-        return $tasks = auth()->user()->tasks()
+        return $user->tasks()
             ->where('status', TaskStatus::ACTIVE)
             ->whereDate('due_date', now())
             ->orderByDesc('priority')
             ->get();
     }
 
-    public static function overdueTasks()
+    public static function overdueTasks($user)
     {
-        return $overdueTasks = auth()->user()
-            ->tasks()
+        return $user->tasks()
             ->overdueTasks()
             ->get();
     }
 
-    public static function activeHabits()
+    public static function activeHabits($user)
     {
-        return $habits = auth()->user()->habits()
+        return $user->habits()
             ->where('active', true)
             ->orderByDesc('id')
             ->get();
@@ -46,21 +44,20 @@ class DashboardData
     public static function stats($user): array
     {
         return [
-            'tasksCreated'   => $tasksCreated   = auth()->user()->tasks()->count(),
+            'tasksCreated' => $user->tasks()->count(),
 
-            'tasksCompleted' => $tasksCompleted = auth()->user()->tasks()
+            'tasksCompleted' => $user->tasks()
                 ->whereNotNull('completed_at')
                 ->count(),
 
-            'habitsCreated'   => $habitsCreated = auth()->user()->habits()->count(),
+            'habitsCreated' => $user->habits()->count(),
 
-            'habitsCompleted' => $habitsCompleted = HabitCheckIn::where('user_id', auth()->id())
+            'habitsCompleted' => HabitCheckIn::where('user_id', $user->id)
                 ->whereDate('date', today())
                 ->count(),
 
             'bestStreak'   => 7,
             'habitSuccess' => 80,
-
         ];
     }
 }
