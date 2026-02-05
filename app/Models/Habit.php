@@ -28,4 +28,9 @@ class Habit extends Model
     {
         return $this->hasMany(HabitCheckIn::class);
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('active', true);
+    }
 }

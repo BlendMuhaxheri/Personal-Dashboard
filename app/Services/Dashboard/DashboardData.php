@@ -19,26 +19,17 @@ class DashboardData
 
     public static function tasksToday($user)
     {
-        return $user->tasks()
-            ->where('status', TaskStatus::ACTIVE)
-            ->whereDate('due_date', now())
-            ->orderByDesc('priority')
-            ->get();
+        return $user->tasks()->today()->get();
     }
 
     public static function overdueTasks($user)
     {
-        return $user->tasks()
-            ->overdueTasks()
-            ->get();
+        return $user->tasks()->overdue()->get();
     }
 
     public static function activeHabits($user)
     {
-        return $user->habits()
-            ->where('active', true)
-            ->orderByDesc('id')
-            ->get();
+        return $user->habits()->active()->get();
     }
 
     public static function stats($user): array
