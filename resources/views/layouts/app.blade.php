@@ -10,7 +10,6 @@
     {{-- Tailwind via Vite --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <body class="bg-gray-100 text-gray-900 min-h-screen">
 

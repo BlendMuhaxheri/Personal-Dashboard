@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Enums\TaskPriority;
 use App\Enums\TaskStatus;
-use App\Models\Task;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-use function Symfony\Component\Clock\now;
 
 class DashboardController extends Controller
 {
@@ -34,7 +32,13 @@ class DashboardController extends Controller
         return view('dashboard', [
             'tasks'        => $tasks,
             'habits'       => $habits,
-            'overdueTasks' => $overdueTasks
+            'overdueTasks' => $overdueTasks,
+            'tasksCreated' => 5,
+            'tasksCompleted' => 2,
+            'habitsCreated' => 3,
+            'habitsCompleted' => 1,
+            'habitSuccess' => 80,
+            'bestStreak' => 7,
         ]);
     }
 }

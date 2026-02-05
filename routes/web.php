@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\HabitController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\TaskController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Habit\HabitController;
+use App\Http\Controllers\Task\TaskController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')
@@ -22,7 +23,12 @@ Route::middleware('guest')
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::post('/logout', [LogoutController::class, 'destroy'])
+        ->name('logout');
+
+    Route::get('/', [DashboardController::class, 'index'])
+        ->name('dashboard');
 
     Route::get('/tasks', [TaskController::class, 'create'])
         ->name('tasks.create');

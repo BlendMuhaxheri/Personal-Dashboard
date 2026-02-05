@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\AuthenticateUserRequest;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
@@ -26,6 +27,8 @@ class AuthController extends Controller
                 'email' => 'The provided credentials are wrong!'
             ]);
         }
+
+        request()->session()->regenerate();
 
         return redirect()->route('dashboard');
     }

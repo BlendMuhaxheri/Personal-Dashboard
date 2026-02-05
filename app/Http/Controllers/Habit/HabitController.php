@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Habit;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Habit\StoreHabitRequest;
 use App\Models\Habit;
 use Illuminate\Http\Request;
