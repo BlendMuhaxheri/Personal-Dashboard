@@ -1,6 +1,6 @@
 @props(['overdueTasks'])
 
-<div class="w-full mt-10 gap-8">
+<div class="w-full">
     {{-- TASK CARD --}}
     <div class="w-full max-w-3xl bg-white rounded-lg shadow-sm border border-slate-200 p-8">
 
@@ -24,11 +24,11 @@
             </div>
 
             <div class="flex items-center gap-4">
-                <span class="text-sm font-medium px-3 py-1 rounded-full bg-yellow-100 text-yellow-800">
-                    High
+                <span class="text-sm font-medium px-3 py-1 rounded-full bg-red-100 text-red-800">
+                    Overdue
                 </span>
 
-                <x-task.overdue-task-button :action="route('tasks.edit')" />
+                <x-task.overdue-task-button :action="route('tasks.edit', $task)" />
             </div>
         </div>
 

@@ -1,6 +1,6 @@
 @props(['tasks'])
 
-<div class="flex w-full mt-10 gap-8">
+<div class="flex w-full mt-10 gap-8 items-start">
     {{-- TASK CARD --}}
     <div class="w-full max-w-3xl bg-white rounded-lg shadow-sm border border-slate-200 p-8">
 
@@ -24,11 +24,13 @@
             </div>
 
             <div class="flex items-center gap-4">
-                <span class="text-sm font-medium px-3 py-1 rounded-full bg-yellow-100 text-yellow-800">
-                    High
-                </span>
+                <a href="{{ route('tasks.edit', $task) }}"
+                    title="Edit task"
+                    class="text-gray-500 hover:text-blue-600 transition">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </a>
 
-                <x-task.mark-complete-button />
+                <x-task.mark-complete-button :action="route('tasks.mark-complete', $task)" />
             </div>
         </div>
 

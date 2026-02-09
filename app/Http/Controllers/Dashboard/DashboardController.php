@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Enums\TaskPriority;
 use App\Enums\TaskStatus;
 use App\Http\Controllers\Controller;
+use App\Models\Habit;
 use App\Models\HabitCheckIn;
 use App\Services\Dashboard\DashboardData;
 use Illuminate\Http\Request;

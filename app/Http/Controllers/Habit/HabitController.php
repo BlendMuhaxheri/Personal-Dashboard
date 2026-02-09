@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Habit;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Habit\StoreHabitRequest;
 use App\Models\Habit;
+use App\Models\HabitCheckIn;
 use Illuminate\Http\Request;
 
 class HabitController extends Controller

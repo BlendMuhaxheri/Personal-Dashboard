@@ -33,4 +33,12 @@ class Habit extends Model
     {
         return $query->where('active', true);
     }
+
+
+    public function scopeWithTodayCheckIns($query)
+    {
+        return $query->with(['habitCheckIns' => function ($q) {
+            $q->where('date', today());
+        }]);
+    }
 }

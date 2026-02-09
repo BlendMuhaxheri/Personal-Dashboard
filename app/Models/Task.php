@@ -13,6 +13,11 @@ class Task extends Model
     /** @use HasFactory<\Database\Factories\TaskFactory> */
     use HasFactory;
 
+    protected $casts = [
+        'due_date' => 'date',
+    ];
+
+
     protected $fillable = [
         'user_id',
         'title',
@@ -25,7 +30,7 @@ class Task extends Model
     {
         return $query
             ->where('status', TaskStatus::ACTIVE)
-            ->where('due_date', '<', now())
+            ->whereDate('due_date', '<', today())
             ->where('priority', TaskPriority::HIGH)
             ->orderByDesc('priority');
     }
@@ -34,6 +39,7 @@ class Task extends Model
     {
         return $query->where('status', TaskStatus::ACTIVE)
             ->whereDate('due_date', now())
+            ->whereNull('completed_at')
             ->orderByDesc('priority');
     }
 

@@ -4,6 +4,7 @@ namespace App\Services\Dashboard;
 
 use App\Enums\TaskStatus;
 use App\Models\HabitCheckIn;
+use Illuminate\Support\Collection;
 
 class DashboardData
 {
@@ -17,20 +18,24 @@ class DashboardData
         ];
     }
 
-    public static function tasksToday($user)
+    public static function tasksToday($user): Collection
     {
         return $user->tasks()->today()->get();
     }
 
-    public static function overdueTasks($user)
+    public static function overdueTasks($user): Collection
     {
         return $user->tasks()->overdue()->get();
     }
 
-    public static function activeHabits($user)
+    public static function activeHabits($user): Collection
     {
-        return $user->habits()->active()->get();
+        return $user->habits()
+            ->active()
+            ->withTodayCheckIns()
+            ->get();
     }
+
 
     public static function stats($user): array
     {

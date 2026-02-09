@@ -1,6 +1,7 @@
 <form method="POST" action="{{$action ?? '#'}}">
     @csrf
     @method('POST')
+    <input type="hidden" name="date" value="{{ today()->toDateString() }}">
     <button
         type="submit"
         class="inline-flex items-center gap-2
