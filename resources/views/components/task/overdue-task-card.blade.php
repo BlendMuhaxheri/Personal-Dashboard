@@ -27,8 +27,12 @@
                 <span class="text-sm font-medium px-3 py-1 rounded-full bg-red-100 text-red-800">
                     Overdue
                 </span>
-
-                <x-task.overdue-task-button :action="route('tasks.edit', $task)" />
+                <a href="{{ route('tasks.edit', $task) }}"
+                    title="Edit task"
+                    class="text-gray-500 hover:text-blue-600 transition">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+                <x-task.overdue-task-button :action="route('tasks.mark-complete', $task)" />
             </div>
         </div>
 

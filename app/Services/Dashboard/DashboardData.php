@@ -30,10 +30,7 @@ class DashboardData
 
     public static function activeHabits($user): Collection
     {
-        return $user->habits()
-            ->active()
-            ->withTodayCheckIns()
-            ->get();
+        return $user->habits()->active()->withTodayCheckIns()->get();
     }
 
 

@@ -1,20 +1,27 @@
 import Chart from 'chart.js/auto';
 
 export function initProgressCharts() {
+    // TASKS CHART
     const tasksChartEl = document.getElementById('tasksChart');
+
     if (tasksChartEl) {
+        const created       = Number(tasksChartEl.dataset.created || 0);
+        const completed     = Number(tasksChartEl.dataset.completed || 0);
+        const createdPrev   = Number(tasksChartEl.dataset.createdPrev || 0);
+        const completedPrev = Number(tasksChartEl.dataset.completedPrev || 0);
+
         new Chart(tasksChartEl, {
             type: 'bar',
             data: {
                 labels: ['Created', 'Completed'],
                 datasets: [
                     {
-                        data: [25, 18],
+                        data: [created, completed],
                         backgroundColor: '#3b82f6',
                         borderRadius: 6
                     },
                     {
-                        data: [14, 12],
+                        data: [createdPrev, completedPrev],
                         backgroundColor: '#22c55e',
                         borderRadius: 6
                     }
@@ -40,20 +47,25 @@ export function initProgressCharts() {
         });
     }
 
+    // HABIT CHART
     const habitChartEl = document.getElementById('habitChart');
+
     if (habitChartEl) {
+        const current = Number(habitChartEl.dataset.current || 0);
+        const target  = Number(habitChartEl.dataset.target || 100);
+
         new Chart(habitChartEl, {
             type: 'bar',
             data: {
                 labels: [''],
                 datasets: [
                     {
-                        data: [80],
+                        data: [current],
                         backgroundColor: '#fb923c',
                         borderRadius: 6
                     },
                     {
-                        data: [60],
+                        data: [target],
                         backgroundColor: '#22c55e',
                         borderRadius: 6
                     }
@@ -72,7 +84,7 @@ export function initProgressCharts() {
                     y: {
                         beginAtZero: true,
                         max: 100,
-                        ticks: { callback: v => v + '%' },
+                        ticks: { callback: v => `${v}%` },
                         grid: { color: '#e5e7eb' }
                     }
                 }

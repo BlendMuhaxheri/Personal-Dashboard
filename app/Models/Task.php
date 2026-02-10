@@ -23,7 +23,8 @@ class Task extends Model
         'title',
         'description',
         'due_date',
-        'priority'
+        'priority',
+        'status',
     ];
 
     public function scopeOverdue($query)

@@ -2,6 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Enums\TaskPriority;
+use App\Enums\TaskStatus;
+use App\Models\Habit;
+use App\Models\Task;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -41,5 +45,37 @@ class UserFactory extends Factory
         return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
         ]);
+    }
+
+    public function withTasksDueToday(int $count = 1)
+    {
+        return $this->has(
+            Task::factory()
+                ->count($count)
+                ->state([
+                    'due_date' => today(),
+                ])
+        );
+    }
+
+    public function withOverdueTasks(int $count = 1)
+    {
+        return $this->has(
+            Task::factory()
+                ->count($count)
+                ->state([
+                    'due_date' => today()->subDay(),
+                    'status'   => TaskStatus::ACTIVE,
+                    'priority' => TaskPriority::HIGH
+                ])
+        );
+    }
+
+    public function withHabits(int $count = 1)
+    {
+        return $this->has(
+            Habit::factory()
+                ->count($count)
+        );
     }
 }

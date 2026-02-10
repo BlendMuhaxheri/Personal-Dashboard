@@ -22,5 +22,12 @@
     </div>
 
     {{-- Charts --}}
-    <x-progress.stats.charts />
+    <x-progress.stats.charts
+        :tasks-created="$tasksCreated"
+        :tasks-completed="$tasksCompleted"
+        :habits-created="$habitsCreated"
+        :habits-completed="$habitsCompleted"
+        :habit-success="$habitSuccess"
+        :best-streak="$bestStreak" />
+
 </div>

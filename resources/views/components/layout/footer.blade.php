@@ -25,9 +25,11 @@
             </a>
 
             {{-- Logout --}}
-            <form>
+            <form method="POST" action="{{route('logout')}}">
                 @csrf
+
                 <button
+                    type="submit"
                     class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-300 bg-white text-slate-700 text-sm font-medium hover:bg-slate-50 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">

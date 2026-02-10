@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,10 @@ class HabitFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id'      => User::factory(),
+            'name'         => $this->faker->name,
+            'frequency'    => $this->faker->randomElement(['1', '3', '5']),
+            'target_count' => $this->faker->randomElement(['1', '3', '5']),
         ];
     }
 }
