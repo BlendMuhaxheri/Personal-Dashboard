@@ -44,6 +44,17 @@ class Task extends Model
             ->orderByDesc('priority');
     }
 
+    public function scopeCreatedTasks($query, $startDate, $endDate)
+    {
+        return $query->whereBetween('created_at', [$startDate, $endDate]);
+    }
+
+    public function scopeCompletedTasks($query, $startDate, $endDate)
+    {
+        return $query->whereNotNull('completed_at')
+            ->whereBetween('completed_at', [$startDate, $endDate]);
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

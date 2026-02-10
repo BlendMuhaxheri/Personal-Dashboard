@@ -15,7 +15,6 @@ class PagesResponseTest extends TestCase
     {
         $user = User::factory()->create();
 
-
         $this->actingAs($user)
             ->get(route('dashboard'))
             ->assertOk();

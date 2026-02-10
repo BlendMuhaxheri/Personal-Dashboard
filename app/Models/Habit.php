@@ -41,4 +41,13 @@ class Habit extends Model
             $q->where('date', today());
         }]);
     }
+
+    public function scopeWithWeeklyCheckIns($query, $startDate, $endDate)
+    {
+        return $query->withCount([
+            'habitCheckIns as weekly_checkins' => function ($q) use ($startDate, $endDate) {
+                $q->whereBetween('date', [$startDate, $endDate]);
+            }
+        ]);
+    }
 }

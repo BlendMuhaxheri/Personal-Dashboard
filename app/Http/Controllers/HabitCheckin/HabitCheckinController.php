@@ -21,7 +21,6 @@ class HabitCheckinController extends Controller
             'habit_id' => $habit->id
         ]);
 
-
         return redirect()->route('dashboard');
     }
 }

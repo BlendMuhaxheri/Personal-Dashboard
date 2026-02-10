@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Habit\HabitController;
 use App\Http\Controllers\HabitCheckin\HabitCheckinController;
+use App\Http\Controllers\Review\WeeklyReviewController;
 use App\Http\Controllers\Task\TaskController;
 use Illuminate\Support\Facades\Route;
 
@@ -54,4 +55,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/habits/{habit}/check-in', [HabitCheckinController::class, 'store'])
         ->name('habits.check-in');
+
+
+    Route::get('/weekly-review', [WeeklyReviewController::class, 'show'])
+        ->name('weekly.review');
 });
